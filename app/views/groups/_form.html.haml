@@ -1,0 +1,5 @@
+= bootstrap_form_for @group, layout: :horizontal do |f|
+  = f.text_field :name
+  = f.text_field :description
+  = f.submit label_button, class: 'btn btn-primary'
+  = link_to 'Cancel', groups_path, class: 'btn btn-secondary', method: :get

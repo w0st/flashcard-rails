@@ -1,0 +1,15 @@
+.card.col-sm-4
+  = bootstrap_form_for [@group, @card] do |f|
+    .card-block.text-xs-center
+      .card-title.text-xs-center
+        Front
+      %strong.card-text.text-primary.text-uppercase
+        = f.text_field :front, skip_label: true
+    .card-block.text-xs-center
+      .card-title
+        Back
+      %strong.card-text.text-primary.text-uppercase
+        = f.text_field :back, skip_label: true
+    .card-block.text-xs-right
+      = f.submit 'Add', class: 'btn btn-primary'
+      = link_to 'Cancel', :back, class: 'btn btn-secondary', method: :get

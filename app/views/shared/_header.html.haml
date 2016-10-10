@@ -1,0 +1,9 @@
+%nav.navbar.navbar-light
+  %ul.nav.navbar-nav.col-md-10
+    %li.nav-item
+      = link_to 'Home', root_path, class: 'nav-link'
+    %li.nav-item
+      = link_to 'Groups', groups_path, class: 'nav-link'
+  .col-md-2
+    = button_to 'Logout',  destroy_user_session_path, method: :delete, class: 'btn btn-secondary' if user_signed_in?
+    = button_to 'Login',  new_user_session_path, class: 'btn btn-secondary' unless user_signed_in?

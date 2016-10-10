@@ -1,0 +1,10 @@
+%h2
+  = @group.name
+%div
+  = @group.description
+%div
+  %h3 Cards
+  = link_to 'New', new_group_card_path(@group), class: 'btn btn-primary'
+  %br/
+  = render partial: 'cards/card', collection: @cards
+

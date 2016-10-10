@@ -1,0 +1,17 @@
+.card.col-sm-4
+  %div{type: 'button', class: 'close', 'aria-label': 'Close'}
+    = button_to '×', card, method: :delete,
+      class: 'btn btn-primary', form: {style: 'display:inline-block;'}, data: {confirm: 'Are you sure'}
+  %img.card-img-top
+  .card-block.text-xs-center
+    .card-title.text-xs-center
+      Front
+    %strong.card-text.text-primary.text-uppercase
+      = card.front
+  .card-block.text-xs-center
+    .card-title
+      Back
+    %strong.card-text.text-primary.text-uppercase
+      = card.back
+  .card-block.text-xs-right
+    = link_to 'Edit', [:edit, card], class: 'btn btn-primary'

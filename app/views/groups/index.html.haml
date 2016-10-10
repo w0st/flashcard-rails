@@ -1,0 +1,19 @@
+%h2 Groups
+= button_to 'Add', new_group_path, class: 'btn btn-primary', method: :get
+%table.table
+  %thead.thead-default
+    %th Name
+    / add icon
+    %th Description
+    %th Actions
+  %tbody
+    - @groups.each do |group|
+      %tr
+        %td= group.name
+        %td= group.description
+        %td
+          = link_to 'Show', group, class: 'btn btn-primary'
+          = link_to 'Edit', [:edit, group], class: 'btn btn-primary'
+          -# Cause link_to with method: :delete rely on javascript!
+          = button_to 'Delete', group, method: :delete,
+            class: 'btn btn-primary', form: {style: 'display:inline-block;'}, data: {confirm: 'Are you sure'}
