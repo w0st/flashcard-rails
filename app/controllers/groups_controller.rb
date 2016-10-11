@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
     if @group.save
       redirect_to @group
     else
-      redirect_to action: :new
+      render :new
     end
   end
 
@@ -39,7 +39,7 @@ class GroupsController < ApplicationController
     if @group.update(group_params)
       redirect_to @group
     else
-      redirect_to action: :edit
+      render :edit
     end
   end
 
