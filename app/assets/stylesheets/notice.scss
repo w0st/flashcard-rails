@@ -1,0 +1,11 @@
+// for rails flash notices
+$alerts: (
+        notice: 'info',
+        alert: 'warning',
+        error: 'danger'
+);
+@each $name, $value in $alerts {
+  .alert-#{$name} {
+    @extend .alert-#{$value} !optional;
+  }
+}
