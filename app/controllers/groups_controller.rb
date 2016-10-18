@@ -12,13 +12,22 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    Group.find(params[:id]).destroy
-    redirect_to action: :index
+    @group = Group.where(user: current_user).find_by id: params[:id]
+    if @group
+      @group.destroy
+      redirect_to action: :index
+    else
+      flash[:alert] = t('group_not_exists_or_not_have_priviliges')
+      redirect_to :root
+    end
   end
 
   def edit
-    @group = Group.find(params[:id])
-
+    @group = Group.where(user: current_user).find_by id: params[:id]
+    unless @group
+      flash[:alert] = t('group_not_exists_or_not_have_priviliges')
+      redirect_to :root
+    end
   end
 
   def index
@@ -30,16 +39,24 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find(params[:id])
-    @cards = @group.cards
+    @group = Group.where(user: current_user).find_by id: params[:id]
+    if @group
+      @cards = @group.cards
+    else
+      flash[:alert] = t('group_not_exists_or_not_have_priviliges')
+      redirect_to :root
+    end
   end
 
   def update
-    @group = Group.find(params[:id])
-    if @group.update(group_params)
+    @group = Group.where(user: current_user).find_by id: params[:id]
+    if @group && @group.update(group_params)
       redirect_to @group
-    else
+    elsif @group
       render :edit
+    else
+      flash[:alert] = t('group_not_exists_or_not_have_priviliges')
+      redirect_to :root
     end
   end
 

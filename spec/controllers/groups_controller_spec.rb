@@ -2,35 +2,40 @@ require 'rails_helper'
 
 RSpec.describe GroupsController, type: :controller do
   let(:user) { create(:user) }
-  before { sign_in user }
+
 
   describe 'GET #index' do
+    before { sign_in user }
     subject { get :index}
 
     it { is_expected.to render_template :index}
   end
 
   describe 'GET #show' do
+    before { sign_in user }
     let!(:group) { create :group, user: user }
-    subject { get :show, id: group.id }
+    subject { get :show, params: { id: group.id } }
 
     it { is_expected.to render_template :show}
   end
 
   describe 'GET #edit' do
+    before { sign_in user }
     let!(:group) { create :group, user: user }
-    subject { get :edit, id: group.id }
+    subject { get :edit, params: { id: group.id } }
 
     it { is_expected.to render_template :edit}
   end
 
   describe 'GET #new' do
+    before { sign_in user }
     subject { get :new}
 
     it { is_expected.to render_template :new}
   end
 
   describe 'POST #create' do
+    before { sign_in user }
     context 'when valid attributes' do
       subject { post :create, params: { group: attributes_for(:group) } }
 
@@ -44,6 +49,7 @@ RSpec.describe GroupsController, type: :controller do
     end
 
     context 'without name attribute' do
+      before { sign_in user }
       subject { post :create, params: { group: attributes_for(:group, name: '') } }
 
       it 'does not create' do
@@ -57,6 +63,7 @@ RSpec.describe GroupsController, type: :controller do
   end
 
   describe 'PUT #update' do
+    before { sign_in user }
     let!(:group) { create :group, user: user }
     let!(:group_valid_params) do
       {name: 'Another name group', description: 'Another description'}
@@ -92,6 +99,7 @@ RSpec.describe GroupsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    before { sign_in user }
     let!(:group) { create :group, user: user }
     subject { delete :destroy, params: { id: group.id } }
 
@@ -102,5 +110,39 @@ RSpec.describe GroupsController, type: :controller do
     it 'redirects to groups' do
       is_expected.to redirect_to(:groups)
     end
+  end
+
+  describe 'not owner of resource' do
+    let(:notowner) {create :user, email: 'notowner@domain.com'}
+    let!(:group) { create :group, user: user }
+    let!(:group_valid_params) do
+      {name: 'Another name group', description: 'Another description'}
+    end
+    before { sign_in notowner }
+
+    it 'GET #show' do
+      get :show, params: { id: group.id }
+      is_expected.to redirect_to(:root)
+      expect(flash[:alert]).to be_truthy
+    end
+
+    it 'POST #edit' do
+      get :edit, params: { id: group.id }
+      is_expected.to redirect_to(:root)
+      expect(flash[:alert]).to be_truthy
+    end
+
+    it 'PUT #update' do
+      put :update, params: { id: group.id, group: group_valid_params }
+      is_expected.to redirect_to(:root)
+      expect(flash[:alert]).to be_truthy
+    end
+
+    it 'DELETE #destroy' do
+      delete :destroy, params: { id: group.id }
+      is_expected.to redirect_to(:root)
+      expect(flash[:alert]).to be_truthy
+    end
+
   end
 end

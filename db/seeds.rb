@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 user = User.create(email: 'user@domain.com', password: 'password', password_confirmation: 'password')
+user = User.create(email: 'user2@domain.com', password: 'password', password_confirmation: 'password')
 group = Group.create(name: 'Office English', user: user)
 Card.create(front: 'stapler', back: 'zszywacz', group: group)
 Card.create(front: 'appointment book', back: 'terminarz', group: group)
