@@ -1,0 +1,16 @@
+-# for real application suppose I'll use rabl or Grape::Entity (check project PSI on GitHub)
+:plain
+  [
+- @groups.each_with_index do |group, index|
+  :plain
+      {
+        "id": #{group.id},
+        "name": "#{group.name}",
+        "description": "#{group.description}",
+        "icon": "#{group.icon}"
+      }
+  - unless index == @groups.size - 1
+    :plain
+        ,
+:plain
+  ]

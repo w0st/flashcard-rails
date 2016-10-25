@@ -1,0 +1,20 @@
+-# for real application suppose I'll use rabl or Grape::Entity (check project PSI on GitHub)
+:plain
+  {
+    "id": "#{@group.id}",
+    "name": "#{@group.name}",
+    "description": "#{@group.description}",
+    "cards": [
+- @cards.each_with_index do |card, index|
+  :plain
+        {
+          "id": #{card.id},
+          "front": "#{card.front}",
+          "back": "#{card.back}"
+        }
+  - unless index == @cards.size - 1
+    :plain
+          ,
+:plain
+    ]
+  }

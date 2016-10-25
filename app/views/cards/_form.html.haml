@@ -1,8 +1,5 @@
 .card.col-sm-4
   = bootstrap_form_for @card do |f|
-    %div{type: 'button', class: 'close', 'aria-label': 'Close'}
-    = button_to '×', @card, method: :delete,
-      class: 'btn btn-primary', form: {style: 'display:inline-block;'}, data: {confirm: 'Are you sure'}
     %img.card-img-top
     .card-block.text-xs-center
       .card-title.text-xs-center
