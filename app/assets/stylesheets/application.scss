@@ -3,4 +3,20 @@
 /*
  *= require rails_bootstrap_forms
  */
-.help-block { color: #730E15}
+body {
+  background-image: image-url("background.jpg");
+  background-size: cover;
+}
+body > .container {
+  margin-top: 5px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.help-block { color: #730E15 }
+.right { text-align: right }
+.navbar {
+  background-color: #2E2F30;
+  border-radius: 0;
+}
