@@ -5,4 +5,9 @@ Rails.application.routes.draw do
   resources :groups do
     resources :cards, shallow: true
   end
+  get :quiz, to: 'quiz#index'
+  post :quiz, to: 'quiz#init'
+  get 'quiz/question', to: 'quiz#question', as: :quiz_question
+  get 'quiz/end', to: 'quiz#end', as: :quiz_end
+  post 'quiz/answer', to: 'quiz#answer', as: :quiz_answer
 end

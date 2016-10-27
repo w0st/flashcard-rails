@@ -22,3 +22,5 @@
 en:
   hello: "Hello world"
   group_not_exists_or_not_have_priviliges: "A group doesn't exist"
+  start: "Start"
+  answer: "Answer"

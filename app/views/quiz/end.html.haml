@@ -1,0 +1,9 @@
+%h2 Summary
+.col-xs-4.offset-xs-4.text-xs-center
+  = "Correct: #{@q_correct}/#{@q_all}"
+
+%progress.progress{value: "#{@q_correct}", max: "#{@q_all}", 'aria-describedby': "example-caption-6"}
+  .progress
+    %span.progress-bar{style: "width: 25%;"}
+
+= link_to 'Try again', quiz_path

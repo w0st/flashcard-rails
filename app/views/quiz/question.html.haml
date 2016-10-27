@@ -1,0 +1,19 @@
+%h2
+  = "Question #{@q_current+1}/#{@q_all}"
+.col-xs-4
+  = "Correct: #{@q_correct}"
+.col-xs-4.offset-xs-4.right
+  = link_to 'End', quiz_end_path, class: 'btn btn-primary'
+%br
+
+.card-block.col-xs-12
+  .card-title.text-xs-center
+    Front
+  .card-text.text-uppercase.text-xs-center.text-primary
+    = @card.front
+  .card-title
+  %strong.text-xs-center.card-text
+    = bootstrap_form_tag url: quiz_answer_path do |f|
+      = f.text_field(:answer, label: 'type your answer below and hit the button')
+      = f.submit t('answer'), class: 'btn btn-primary'
+

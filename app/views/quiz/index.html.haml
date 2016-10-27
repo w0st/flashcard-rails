@@ -1,0 +1,9 @@
+%h2 Quiz
+- if @groups.size > 0
+  Select groups of words to quiz:
+  = bootstrap_form_tag url: '/quiz' do |f|
+    - @groups.each do |g|
+      = f.check_box("[group][#{g.id}]", label: g.name)
+    = f.submit t('start'), class: 'btn btn-primary'
+- else
+  You don't have any cards to launch a quiz! Add them and come back, please.
